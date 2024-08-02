@@ -1,6 +1,13 @@
 -- Create a ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+-- Try to parent to CoreGui, if not available, use PlayerGui
+local success, err = pcall(function()
+    screenGui.Parent = game:GetService("CoreGui")
+end)
+if not success then
+    screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+end
 
 -- Create a button
 local button = Instance.new("TextButton")
